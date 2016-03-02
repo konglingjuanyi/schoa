@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.hao</groupId>
+		<artifactId>schoa</artifactId>
+		<version>1.0</version>
+	</parent>
+	
+	<artifactId>schoa-web</artifactId>
+	<packaging>war</packaging>
+	<name>schoa-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.18</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.torque</groupId>
+			<artifactId>torque-runtime</artifactId>
+			<version>3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xerces</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<!-- poi支持excel -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<!-- poi支持word -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>3.8</version>
+		</dependency>
+		
+		<!-- 汉字生成拼音 -->
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		
+		<!-- ik分词 -->
+		<dependency>
+			<groupId>com.hao.schoa</groupId>
+			<artifactId>ikAnalyzer-schoa</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>4.4.0</version>
+		</dependency>
+		
+		<!-- 任务调度 -->
+		<dependency>  
+            <groupId>org.quartz-scheduler</groupId>  
+            <artifactId>quartz</artifactId>  
+            <version>1.8.5</version>  
+        </dependency> 
+		
+	</dependencies>
+	
+	<build>
+		<finalName>schoa-web</finalName>
+		<resources>
+	  		<resource>
+	  			<directory>src/main/resources</directory>
+	  			<filtering>true</filtering>
+	  		</resource>
+	  	</resources>
+	</build>
+	
+	<profiles>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<mysql.url>jdbc:mysql://127.0.0.1:3306/schoa</mysql.url>
+				<mysql.user>root</mysql.user>
+				<mysql.password>root</mysql.password>
+				<logs.torque.file>/Users/haoguowei/code/logs/torque.log</logs.torque.file>
+				<logs.schoa.file>/Users/haoguowei/code/logs/schoa.log</logs.schoa.file>
+				<logs.level>debug</logs.level>
+				<schoa.image.url>http://127.0.0.1:8080/schoa-res/res</schoa.image.url>
+				<schoa.image.path>/Users/haoguowei/code/git/schoa/schoa-res/target/schoa-res/res</schoa.image.path>
+			</properties>
+		</profile>
+		<profile>
+			<id>online</id>
+			<properties>
+				<mysql.url>jdbc:mysql://127.0.0.1:3306/schoa</mysql.url>
+				<mysql.user>root</mysql.user>
+				<mysql.password>root@2014</mysql.password>
+				<logs.torque.file>/logs/torque.log</logs.torque.file>
+				<logs.schoa.file>/logs/schoa.log</logs.schoa.file>
+				<logs.level>info</logs.level>
+				<schoa.image.url>http://10.200.251.117/schoa-res/res</schoa.image.url>
+				<schoa.image.path>/opt/schoa-res/res</schoa.image.path>
+			</properties>
+		</profile>
+	</profiles>
+</project>
